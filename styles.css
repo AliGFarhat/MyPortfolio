@@ -183,7 +183,7 @@ body {
 .hero-image-glow {
     position: absolute;
     inset: -1rem;
-    background: linear-gradient(to right, #f97316, #dc2626);
+    background: linear-gradient(to right, #fb923c, #ef4444);
     border-radius: 9999px;
     opacity: 0.2;
     filter: blur(2rem);
