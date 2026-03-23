@@ -72,3 +72,37 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Page Transitions for internal links
+document.addEventListener('DOMContentLoaded', function() {
+    const links = document.querySelectorAll('a[href]');
+    links.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            const target = this.getAttribute('target');
+            
+            // Identify internal links (exclude hash links, external links, emails, and new tabs)
+            const isInternal = href && 
+                               !href.startsWith('#') && 
+                               !href.startsWith('http') && 
+                               !href.startsWith('mailto:') && 
+                               target !== '_blank';
+                               
+            if (isInternal) {
+                e.preventDefault();
+                document.body.classList.add('page-exit');
+                
+                setTimeout(function() {
+                    window.location.href = href;
+                }, 200); // Matches the CSS transition duration
+            }
+        });
+    });
+});
+
+// Handle back button cache (BFCache)
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        document.body.classList.remove('page-exit');
+    }
+});
